@@ -3,13 +3,13 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
-import com.avaje.ebean.Model;
+import com.avaje.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
 
 // Product Entity managed by the ORM
 @Entity
-public class Product extends Model {
+public class Product extends Model{
 
     // Properties
     // Annotate id as the primary key
@@ -20,6 +20,9 @@ public class Product extends Model {
     @Constraints.Required
     private String name;
 
+    //@ManyToOne
+    //private Category category;
+
     @Constraints.Required
     private String description;
 
@@ -29,17 +32,26 @@ public class Product extends Model {
     @Constraints.Required
     private double price;
 
+    @Constraints.Required
+    private String colour;
+	
+    @Constraints.Required
+    private String rating;
+
     // Default constructor
-    public  Product() {
+    public Product() {
     }
 
     // Constructor to initialise object
-    public  Product(Long id, String name, String description, int stock, double price) {
+    public Product(Long id, String name, String description, String colour, int stock, double price, String rating) {
         this.id = id;
         this.name = name;
+        //this.category = category;
         this.description = description;
+	this.colour = colour;
         this.stock = stock;
         this.price = price;
+	this.rating = rating;
     }
 
     //Generic query helper for entity Computer with id Long
@@ -50,6 +62,23 @@ public class Product extends Model {
     public static List<Product> findAll() {
         return Product.find.all();
     }
+
+    public String getColour() {
+	return colour;
+   }
+
+   public void setColour(String colour) {
+	this.colour = colour;
+}
+
+    public String getRating() {
+	return rating;
+   }
+
+   public void setRating(String rating) {
+	this.rating = rating;
+}
+
 
     public Long getId() {
         return id;
@@ -90,4 +119,15 @@ public class Product extends Model {
         this.price = price;
     }
 
+
+
+
+
+    //public Category getCategory() {
+    //    return category;
+    //}
+
+    //public void setCategory(Category category) {
+    //    this.category = category;
+    //}
 }

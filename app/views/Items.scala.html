@@ -1,0 +1,173 @@
+@(products: List[models.Product], categories: List[models.Category], user: models.users.User)
+
+@main("Items") {
+    <div class="container">
+	
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Products</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-responsive img-border-left" src="img/prod5.jpg" alt="">
+                </div>
+                <div class="col-md-6">
+                    <p>Info on Products</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Products</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <img style="width:750px" src="@routes.Assets.versioned("images/prod1.jpg")">
+                    <h3>Eyes</h3>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <img style="width:750px" src="@routes.Assets.versioned("images/prod2.jpg")">
+                    <h3>Lips</h3>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <img style="width:750px" src="@routes.Assets.versioned("images/prod3.jpg")">
+                    <h3>Face</h3>
+                </div>
+			
+				<!--Description-->
+				
+				<div class="col-lg-12">
+                    
+                    <br>
+                    
+                </div>
+                <div style="text-align: left" class="col-sm-4 text-center">
+                    <p>Eye Makeup Products include products that are used around the eye 
+					to enhance the appearance of the eyes and to emphazise the beauty of 
+					the eyes. They include such products as eye-shadow, eye-liner, eye-brow 
+					products, and other products that can help to enhance and accent the eyes.</p>
+					<hr>
+                </div>
+                <div style="text-align: left" class="col-sm-4 text-center">
+                    <p>Eye Makeup Products include products that are used around the eye 
+					to enhance the appearance of the eyes and to emphazise the beauty of 
+					the eyes. They include such products as eye-shadow, eye-liner, eye-brow 
+					products, and other products that can help to enhance and accent the eyes.</p>
+					<hr>
+                </div>
+                <div style="text-align: left" class="col-sm-4 text-center">
+                    <p>Eye Makeup Products include products that are used around the eye 
+					to enhance the appearance of the eyes and to emphazise the beauty of 
+					the eyes. They include such products as eye-shadow, eye-liner, eye-brow 
+					products, and other products that can help to enhance and accent the eyes.</p>
+					<hr>
+				
+                </div>
+				<div class="clearfix"></div>
+			</div>
+				 
+				<!--ITEMS 1 PIC-->
+			<div class="box">
+				<div class="col-lg-12">
+                    <br>
+                </div>
+                <div class="col-sm-4 text-center">
+					<h3 class="intro-text text-center">
+						<hr>
+                        <strong>Eye Shadow</strong>
+                    </h3>
+                    <img style="width:444px; height:327px" src="@routes.Assets.versioned("images/prod1.jpg")">
+                    
+                </div>
+                <div class="col-sm-4 text-center">
+					<h3 class="intro-text text-center">
+						<hr>
+                        <strong>Lipstick</strong>
+                    </h3>
+                    <img style="width:444px; height:327px" src="@routes.Assets.versioned("images/prod2.jpg")">
+                </div>
+                <div class="col-sm-4 text-center">
+					<h3 class="intro-text text-center">
+						<hr>
+                        <strong>Foundation</strong>
+                    </h3>
+                    <img style="width:444px; height:327px" src="@routes.Assets.versioned("images/prod3.jpg")">
+                </div>
+			
+				<!--ITEM 1 Description-->
+				<div class="col-lg-12">
+                    
+                    <br>
+                    
+                </div>
+                <div style="text-align: left" class="col-sm-12 text-center">
+		@if(flash.constainsKey("success")){
+	  <div class="alert alert-success">
+	  @flash.get(success")
+	  </div>
+        <table class="table table-bordered table-hover table-condensed">
+          <thead>
+          <!-- The header row-->
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+	    <th>Colour</th>
+            <th>Stock</th>
+	    <th>Rating</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody>
+            <!-- Product row(s) -->
+            @for(p <- products) {
+              <tr>
+                  <td class="numeric">@p.getId</td>
+                  <td>@p.getName</td>
+                  <td>@p.getDescription</td>
+		  <td>@p.getColour</td>
+                  <td class = "numeric">@p.getStock</td>
+		  <td>@p.getRating</td>
+                  <td class = "numeric">&euro; @("%.2f".format(p.getPrice))</td>
+              </tr>
+		}
+		<a href="@routes.HomeController.deleteProduct(p.getId)" class="btn-xs btn-danger"
+		onclick="return confirmDel();">
+		<span class="glyphicon glyphicon-trash"></span>
+	      </a>
+	      <a href="@routes.HomeController.addProduct()">
+		<button class="btn btn-primary">Add a Product</button>
+	      </a>
+		<!--Edit product button -->
+		<!--Edit product button -->
+<td>
+	<a hred="@routes.HomeController.updateProduct(p.getId)" class="btn-xs btn-danger">
+	<span class="glyphicon glyphicon-pencil"></span></a>
+
+<td>
+
+          </tbody>
+        </table>
+
+                
+        </div>
+
+    </div>
+    <!-- /.container -->
+	<script>
+    // JavaScript function returns true if user clicks yes, otherwise, false
+    function confirmDel() {
+        return confirm('Are you sure?');
+    }
+  </script>
+}
